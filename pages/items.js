@@ -13,6 +13,9 @@ const ShopStyleSix = () => {
     if (query.search) {
       setSearchTerm(query.search);
     }
+    if(query.search === ""){
+      setSearchTerm(undefined)
+    }
   }, [query.search]);
 
   return (

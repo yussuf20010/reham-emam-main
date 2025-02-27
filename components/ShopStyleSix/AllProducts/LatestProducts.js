@@ -13,6 +13,7 @@ import { FiWhatsapp, FiTwitter, FiFacebook } from "react-icons/fi";
 const MySwal = withReactContent(Swal);
 
 const LatestProducts = ({searchTerms}) => {
+  console.log(searchTerms)
   const { addToCart } = useCart();
   const [products, setProducts] = useState([]);
   const [copiedProductId, setCopiedProductId] = useState(null);
@@ -68,7 +69,7 @@ const LatestProducts = ({searchTerms}) => {
     });
   };
   const filteredProducts =
-    searchTerms?.trim() === ""
+    searchTerms?.trim() === undefined
       ? products
       : products.filter((product) =>
           product.name.toLowerCase().includes(searchTerms?.toLowerCase())
