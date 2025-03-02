@@ -82,25 +82,33 @@ const Navbar = () => {
         <div className="novine-nav">
           <div className="container flex justify-between items-center">
             {/* Brand Name */}
-            <Link href="/" className="text-purple-600 font-bold text-xl">
-              Reiham Emam
-            </Link>
-
-            {/* Featured Products Links (Side by Side) */}
-            <div className="hidden md:flex gap-6">
-              {featuredProducts.map((product) => (
-                <Link
-                  key={product.id}
-                  href={`/products/${product.id}`}
-                  className="text-purple-700 font-medium hover:text-purple-500"
-                >
-                  {product.name}
-                </Link>
-              ))}
-              <Link href="/items" className="text-purple-700 font-semibold hover:text-purple-500">
-                See More
+            <div className="flex flex-row items-center gap-6">
+              <Link href="/" className="font-bold text-xl">
+                Reiham Emam
               </Link>
+
+              {/* Featured Products Links (Side by Side) */}
+              {featuredProducts.length > 0 &&
+                <div className="hidden md:flex gap-6">
+                  {featuredProducts.map((product) => (
+                    <Link
+                      key={product.id}
+                      href={`/products/${product.id}`}
+                      className="font-bold hover:text-purple-500"
+                      style={{
+                        fontWeight: "bold"
+                      }}
+                    >
+                      {product.name}
+                    </Link>
+                  ))}
+                  <Link href="/items" className="font-semibold hover:text-purple-500">
+                    See More
+                  </Link>
+                </div>
+              }
             </div>
+            <div className="flex flex-row items-center gap-3">
             <input
               type="text"
               placeholder="Search products..."
@@ -127,6 +135,7 @@ const Navbar = () => {
                   <Link href="/signup">Signup</Link>
                 </>
               )}
+            </div>
             </div>
           </div>
         </div>
