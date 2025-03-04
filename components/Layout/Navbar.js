@@ -7,12 +7,16 @@ import AuthContext from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
 import { useState, useEffect, useCallback, useContext } from "react";
 
-
-
 const Navbar = () => {
   const router = useRouter();
   const { user, logout } = useContext(AuthContext);
-  const { cart, increaseQuantity, decreaseQuantity, removeFromCart, clearCart } = useCart();
+  const {
+    cart,
+    increaseQuantity,
+    decreaseQuantity,
+    removeFromCart,
+    clearCart,
+  } = useCart();
   const [isActiveCartModal, setActiveCartModal] = useState(false);
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -68,7 +72,10 @@ const Navbar = () => {
       clearCart();
       setActiveCartModal(false);
     } catch (error) {
-      console.error("Error creating order:", error.response?.data || error.message);
+      console.error(
+        "Error creating order:",
+        error.response?.data || error.message
+      );
     }
   }, [cart, user.token]);
   const handleSearch = (e) => {
@@ -88,7 +95,7 @@ const Navbar = () => {
               </Link>
 
               {/* Featured Products Links (Side by Side) */}
-              {featuredProducts.length > 0 &&
+              {featuredProducts.length > 0 && (
                 <div className="hidden md:flex gap-6">
                   {featuredProducts.map((product) => (
                     <Link
@@ -96,46 +103,55 @@ const Navbar = () => {
                       href={`/products/${product.id}`}
                       className="font-bold hover:text-purple-500"
                       style={{
-                        fontWeight: "bold"
+                        fontWeight: "bold",
                       }}
                     >
                       {product.name}
                     </Link>
                   ))}
-                  <Link href="/items" className="font-semibold hover:text-purple-500">
+                  <Link
+                    href="/items"
+                    className="font-semibold hover:text-purple-500"
+                  >
                     See More
                   </Link>
                 </div>
-              }
-            </div>
-            <div className="flex flex-row items-center gap-3">
-            <input
-              type="text"
-              placeholder="Search products..."
-              className="p-2 rounded-md w-60 bg-gray-100"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={handleSearch}
-            />
-
-            {/* Cart & Auth Section */}
-            <div className="flex gap-3 items-center">
-              {user.isLogin ? (
-                <>
-                  <button onClick={logout} className="w-28 h-10 text-white bg-red-600 rounded">
-                    Logout
-                  </button>
-                  <button onClick={() => setActiveCartModal(!isActiveCartModal)} className="flex items-center">
-                    <i className="fas fa-shopping-bag mr-1"></i> Cart
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Link href="/login">Login</Link>
-                  <Link href="/signup">Signup</Link>
-                </>
               )}
             </div>
+            <div className="flex flex-row items-center gap-3">
+              <input
+                type="text"
+                placeholder="Search products..."
+                className="p-2 rounded-md w-60 bg-gray-100"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={handleSearch}
+              />
+
+              {/* Cart & Auth Section */}
+              <div className="flex gap-3 items-center">
+                {user.isLogin ? (
+                  <>
+                    <button
+                      onClick={logout}
+                      className="w-28 h-10 text-white bg-red-600 rounded"
+                    >
+                      Logout
+                    </button>
+                    <button
+                      onClick={() => setActiveCartModal(!isActiveCartModal)}
+                      className="flex items-center"
+                    >
+                      <i className="fas fa-shopping-bag mr-1"></i> Cart
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link href="/login">Login</Link>
+                    <Link href="/signup">Signup</Link>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -146,7 +162,10 @@ const Navbar = () => {
         <div className="modal shoppingCartModal show">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
-              <button className="close" onClick={() => setActiveCartModal(false)}>
+              <button
+                className="close"
+                onClick={() => setActiveCartModal(false)}
+              >
                 &times;
               </button>
               <div className="modal-body">
@@ -158,11 +177,19 @@ const Navbar = () => {
                         <h3>{item.name}</h3>
                         <div className="flex flex-col">
                           <div className="flex justify-around">
-                            <button className="text-2xl" onClick={() => decreaseQuantity(item.id)}>
+                            <button
+                              className="text-2xl"
+                              onClick={() => decreaseQuantity(item.id)}
+                            >
                               -
                             </button>
-                            <span className="w-8 py-1 border rounded text-center">{item.quantity}</span>
-                            <button className="text-2xl" onClick={() => increaseQuantity(item.id)}>
+                            <span className="w-8 py-1 border rounded text-center">
+                              {item.quantity}
+                            </span>
+                            <button
+                              className="text-2xl"
+                              onClick={() => increaseQuantity(item.id)}
+                            >
                               +
                             </button>
                           </div>
@@ -182,7 +209,11 @@ const Navbar = () => {
                   <span>Subtotal</span>
                   <span className="subtotal">
                     ${" "}
-                    {cart.reduce((total, item) => total + item.price * item.quantity, 0)} EP
+                    {cart.reduce(
+                      (total, item) => total + item.price * item.quantity,
+                      0
+                    )}{" "}
+                    EP
                   </span>
                 </div>
                 <div className="product-cart-btn">
@@ -193,7 +224,10 @@ const Navbar = () => {
               </div>
             </div>
           </div>
-          <span className="close-modal" onClick={() => setActiveCartModal(false)}>
+          <span
+            className="close-modal"
+            onClick={() => setActiveCartModal(false)}
+          >
             X
           </span>
         </div>
