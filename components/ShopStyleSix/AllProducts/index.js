@@ -4,7 +4,7 @@ import LatestProducts from "./LatestProducts";
 // import SpecialProducts from "./SpecialProducts";
 // import FeaturedProducts from "./FeaturedProducts";
 
-const AllProducts = ({searchTerms}) => {
+const AllProducts = ({ searchTerms }) => {
   return (
     <>
       <div className="all-products-area py-12">
@@ -32,11 +32,18 @@ const AllProducts = ({searchTerms}) => {
               {/* <TabPanel> */}
               <div className="relative rounded-lg mb-3 bg-purple-600 text-white py-2 text-center text-xl font-semibold overflow-hidden">
                 <div className="absolute top-0 left-0 h-full w-10 bg-gradient-to-r from-purple-600 to-transparent"></div>
-                <marquee behavior="scroll" direction="left" scrollamount="15">New Collection</marquee>
+                <marquee
+                  behavior="scroll"
+                  direction="left"
+                  scrollamount="15"
+                  className="text-center"
+                >
+                  New Collection
+                </marquee>
                 <div className="absolute top-0 right-0 h-full w-10 bg-gradient-to-l from-purple-600 to-transparent"></div>
               </div>
 
-              <LatestProducts searchTerms={searchTerms}/>
+              <LatestProducts searchTerms={searchTerms} />
               {/* </TabPanel> */}
               {/* 
               <TabPanel>
